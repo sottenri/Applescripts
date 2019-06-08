@@ -2,6 +2,10 @@
 Author: Stuart Ottenritter
 Date Created: 2018-10-30
 Description: Filter for PDFs, then rename, move to outbox folder, and prepend to all keyword-matched PDFs within the archive folder. The input PDFs must follow this strategy; keywords (multiple keywords are separated with a single SPACE character) are prefixed to the filename of the input PDF. Use a delimiter of your choice (see property below, e.g. "--") to split the keyword prefix and filename. If the keyword is contained within the filename of the archive PDF within the archive folder, then the input PDF is prepended to that matched archive PDF.
+Note: 
+- Tested on macOS Mojave Version 10.14.5. Code is not reliably maintained.
+- Uses Adobe Acrobat to process the PDF documents.
+- This script operates on a three folder structure. For example, the "PDF Inbox" folder is assigned this Applescript as a Folder Action. PDF documents added to the inbox folder are renamed & moved to the "PDF Outbox" folder; if it does not exist one is created. The third folder Ñ "PDF Archive" Ñ is also created if it does not exist. PDF documents with one or more keyword prefixes are also prepended to all PDF documents within the archive folder whose filename contains the keyword. See the properties below to edit the folder names. 
 Parameters:
 - this_folder [alias]: the folder to which the Folder Action is assigned. Â
 https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/reference/ASLR_folder_actions.html
@@ -168,8 +172,6 @@ on keys_and_file_name(this_item)
 end keys_and_file_name
 
 -- sub-routine returns a list of files whose filenames contain keywords
--- parameter:
--- these_keywords [list]: list of strings
 on list_keyword_archive_matches(these_keywords)
 	set matched_items to {}
 	repeat with this_keyword in these_keywords
@@ -258,8 +260,12 @@ end pdf_info
 
 -- sub-routine returns the basename; i.e. removes extension
 on basename(this_item)
-	set {name:item_name, name extension:item_name_extension} to (info for this_item)
-	set item_name to text 1 thru ((count item_name) - (count item_name_extension) - 1) of item_name
+	try
+		set {name:item_name, name extension:item_name_extension} to (info for (this_item as alias))
+		set item_name to text 1 thru ((count item_name) - (count item_name_extension) - 1) of item_name
+	on error errMsg
+		display alert "Failed to extract basename." & linefeed & linefeed & errMsg giving up after 6
+	end try
 	return item_name
 end basename
 
