@@ -27,21 +27,35 @@
 * [Google Chrome](https://www.google.com/chrome/)
 * [Firefox](https://www.mozilla.org/en-US/firefox/)
 * [Brave Browser](https://brave.com)
+* [Adobe Acrobat](https://acrobat.adobe.com/us/en/acrobat/pdf-reader.html)
 
 ---
 
 ## About Applescript
->"AppleScript is a scripting language that makes possible direct control of scriptable applications and of many parts of the Mac OS. A scriptable application is one that makes its operations and data available in response to AppleScript messages, called Apple events."  — [Introduction to AppleScript Overview](https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/AppleScriptX.html)
+>AppleScript is a scripting language that makes possible direct control of scriptable applications and of many parts of the Mac OS. A scriptable application is one that makes its operations and data available in response to AppleScript messages, called Apple events. — [Introduction to AppleScript Overview](https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/AppleScriptX.html)
 
 ### Show Script Menu in Menu Bar
-Check the "Show Script menu in menu bar" option in the Script Editor preferences. 
+Quickly access scripts in the macOS menu bar. Check the "Show Script menu in menu bar" option in the Script Editor preferences. 
 * AppleScripts that are saved to the `~/Library/Scripts/` folder in the users library will appear in the menu bar drop down. 
-* Save folder actions in the `~/Library/Scripts/Folder Action Scripts/` folder. These scripts are available when assigning a folder action. Secondary click the folder and navigate to "Folder Actions Setup...".
 * Save application specific scripts in the corresponding folders; e.g. Safari scripts in `~/Library/Scripts/Applications/Safari/your_safari_script.scpt` or Photos scripts in `~/Library/Scripts/Applications/Photos/your_photos_script.scpt`. These scripts will be shown in the Script menu bar drop down when the corresponding application is active.
 
 Read More:
 * [How to enable the AppleScript menu on the Mac OS X menu bar | alvinalexander.com](https://alvinalexander.com/mac-os-x/how-to-show-applescript-menu-item-mac-osx-menu-bar)
 * [Where to save your custom AppleScript programs | alvinalexander.com](https://alvinalexander.com/blog/post/mac-os-x/where-put-applescript-program-script-directory-folder)
+
+### Folder Actions
+>Folder Actions is a feature of macOS that lets you associate AppleScript scripts with folders. A Folder Action script is executed when the folder to which it is attached has items added or removed, or when its window is opened, closed, moved, or resized. The script provides a handler that matches the appropriate format for the action, as described in this chapter.
+Folder Actions make it easy to create hot folders that respond to external actions to trigger a workflow. For example, you can use a Folder Action script to initiate automated processing of any photo dropped in a targeted folder. A well written Folder Action script leaves the hot folder empty. This avoids repeated application of the action to the same files, and allows Folder Actions to perform more efficiently.
+You can Control-click a folder to access some Folder Action features with the contextual menu in the Finder. Or you can use the Folder Actions Setup application, located in /System/Library/CoreServices. This application lets you perform tasks such as the following:
+* Enable or disable Folder Actions.
+* View the folders that currently have associated scripts
+* View and edit the script associated with a folder.
+* Add folders to or remove folders from the list of folders.
+* Associate one or more scripts with a folder.
+* Enable or disable all scripts associated with a folder.
+* Enable or disable individual scripts associated with a folder.
+* Remove scripts associated with a folder.
+Folder Actions Setup looks for scripts located in /Library/Scripts/Folder Action Scripts and ~/Library/Scripts/Folder Action Scripts. You can use the sample scripts located in /Library/Scripts/Folder Action Scripts or any scripts you have added to these locations, or you can navigate to other scripts. — [Folder Actions Reference](https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/reference/ASLR_folder_actions.html)
 
 ### Combine AppleScript with Automator
 Some Applescripts are best when run within an Automator Quick Action workflow; formerly called a Service. Scripts meant to run within or be launched by Automator are located in the [Automator](./Scripts/Automator) folder. Quick Action workflows can be accessed in the Finder window, Services menu, Touch Bar, and most notably can be assigned a **keystroke shortcut**. 
